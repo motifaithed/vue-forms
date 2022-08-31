@@ -48,7 +48,7 @@
       </div>
     </div>
     <div class="form-control">
-      <rating-control></rating-control>
+      <rating-control v-model="rating"></rating-control>
     </div>
     <div class="form-control">
         <input id="confirm-submission" name="confirm-submission"  type="checkbox" v-model="confirmSubmission" />
@@ -73,7 +73,8 @@
         interests:[],
         how: null,
         confirmSubmission: false,
-        userNameIsValid: 'pending'
+        userNameIsValid: 'pending',
+        rating: null
       }
     },
     methods:{
@@ -89,6 +90,7 @@
         console.log(this.confirmSubmission);
         this.confirmSubmission = false;
         this.userNameIsValid = 'pending'
+        this.rating = null;
       },
       checkUserName(){
         if(this.userName.trim() === ''){
