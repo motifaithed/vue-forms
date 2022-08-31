@@ -47,7 +47,10 @@
         <label for="how-other">Other</label>
       </div>
     </div>
-    <div>
+    <div class="form-control">
+      <rating-control></rating-control>
+    </div>
+    <div class="form-control">
         <input id="confirm-submission" name="confirm-submission"  type="checkbox" v-model="confirmSubmission" />
         <label for="confirm-submission">Confirm Submission</label>
       </div>
@@ -57,7 +60,11 @@
   </form>
 </template>
 <script>
+  import RatingControl from './RatingControl.vue';
   export default {
+    components: {
+      RatingControl
+    },
     data(){
       return {
         userName:'',
