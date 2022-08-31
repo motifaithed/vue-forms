@@ -1,8 +1,9 @@
 <template>
   <form @submit.prevent="submitForm">
-    <div class="form-control">
+    <div class="form-control" :class="{invalid: userNameIsValid === 'invalid'}">
       <label for="user-name">Your Name</label>
-      <input id="user-name" name="user-name" type="text" v-model="userName"/>
+      <input id="user-name" name="user-name" type="text" v-model="userName" @blur="checkUserName"/>
+      <p v-if="userNameIsValid === 'invalid'" id="userNameValidateParagraph">Please input a valid name!</p>
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
@@ -64,7 +65,8 @@
         referrer: 'wom',
         interests:[],
         how: null,
-        confirmSubmission: false
+        confirmSubmission: false,
+        userNameIsValid: 'pending'
       }
     },
     methods:{
@@ -79,6 +81,15 @@
         console.log('confirm submission: ');
         console.log(this.confirmSubmission);
         this.confirmSubmission = false;
+        this.userNameIsValid = 'pending'
+      },
+      checkUserName(){
+        if(this.userName.trim() === ''){
+          this.userNameIsValid = 'invalid'
+        }else{
+          this.userNameIsValid = 'valid'
+        }
+        console.log('hello world');
       }
     }
   }
@@ -96,11 +107,21 @@ form {
 .form-control {
   margin: 0.5rem 0;
 }
-
+.form-control.invalid input{
+  border-color: red;
+}
+#userNameValidateParagraph{
+  color: red;
+}
+.form-control.invalid input{
+  border-color: red;
+}
+.form-control.invalid label{
+  color: red;
+}
 label {
   font-weight: bold;
 }
-
 h2 {
   font-size: 1rem;
   margin: 0.5rem 0;
